@@ -11,7 +11,7 @@ c:
 	gcc solution.c -o solution && ./solution
 
 java:
-	javac Solution.java && java Solution
+	javac solution.java && java solution
 
 js:
 	node solution.js
