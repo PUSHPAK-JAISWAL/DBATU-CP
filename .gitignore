@@ -6,12 +6,23 @@ env/
 __pycache__/
 *.pyc
 
-# C/C++
-*.out
+# C/C++ and V
+# This catches all Windows executables
+*.exe
+# This catches Linux/Mac compiled binaries
 solution
+*.out
+*.o
+*.obj
 
 # Node
 node_modules/
+package-lock.json
 
 # Java
 *.class
+# If you use IDEs like IntelliJ or VS Code
+.project
+.classpath
+.settings/
+bin/
