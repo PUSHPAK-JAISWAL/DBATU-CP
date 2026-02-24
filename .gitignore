@@ -1,0 +1,17 @@
+# Conda
+env/
+.conda/
+
+# Python
+__pycache__/
+*.pyc
+
+# C/C++
+*.out
+solution
+
+# Node
+node_modules/
+
+# Java
+*.class
