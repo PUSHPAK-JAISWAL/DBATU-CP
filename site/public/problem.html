@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Problem</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="index.html">← Back</a>
+  <h1 id="title"></h1>
+  <pre id="question"></pre>
+
+  <div id="solutions"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    fetch("data.json")
+      .then(res => res.json())
+      .then(data => {
+        const problem = data.find(p => p.id === id);
+        if (!problem) return;
+
+        document.getElementById("title").innerText = problem.title;
+        document.getElementById("question").innerText = problem.question;
+
+        const container = document.getElementById("solutions");
+
+        Object.entries(problem.solutions).forEach(([lang, code]) => {
+          const block = document.createElement("div");
+          block.className = "solution";
+
+          block.innerHTML = `
+            <h3>${lang}</h3>
+            <button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText)">Copy</button>
+            <pre>${code.replace(/</g,"&lt;")}</pre>
+          `;
+
+          container.appendChild(block);
+        });
+      });
+  </script>
+</body>
+</html>
