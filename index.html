@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>DBATU Competitive Programming</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>DBATU Competitive Programming</h1>
+  <div id="problems"></div>
+
+  <script>
+    fetch("data.json")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("problems");
+
+        data.forEach(problem => {
+          const div = document.createElement("div");
+          div.className = "card";
+          div.innerHTML = `
+            <h3>${problem.title}</h3>
+            <p>${problem.question.substring(0, 200)}...</p>
+            <a href="problem.html?id=${problem.id}">View Solutions</a>
+          `;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
