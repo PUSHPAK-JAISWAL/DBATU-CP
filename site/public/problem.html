@@ -5,379 +5,308 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Problem — DBATU CP</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js" defer></script>
 </head>
-<body class="problem-page">
+<body class="prob-page">
 
-  <div class="bg-grid"></div>
-  <div class="bg-glow"></div>
+<div class="noise"></div>
 
-  <header>
-    <div class="header-inner">
-      <a href="index.html" class="back-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back to Archive
-      </a>
-      <div class="logo-block compact">
-        <span class="logo-bracket">{</span>
-        <span class="logo-title">DBATU CP</span>
-        <span class="logo-bracket">}</span>
+<header>
+  <div class="header-inner">
+    <a class="back-btn" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back
+    </a>
+    <a class="logo" href="index.html">
+      <div class="logo-icon">&lt;/&gt;</div>
+      <div>
+        <div class="logo-name">DBATU CP</div>
+        <div class="logo-sub">Competitive Programming</div>
       </div>
-      <div class="header-actions">
-        <button class="icon-btn" id="share-btn" title="Share problem">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        </button>
-      </div>
-    </div>
-  </header>
+    </a>
+    <button id="share-btn" class="share-btn" title="Copy link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Share
+    </button>
+  </div>
+</header>
 
-  <main class="problem-container">
+<div class="prob-layout">
 
-    <!-- Problem Statement -->
-    <section class="problem-statement" id="problem-statement">
-      <div class="problem-meta-top">
-        <div class="breadcrumb">
-          <span>Archive</span>
-          <span class="breadcrumb-sep">›</span>
-          <span id="problem-breadcrumb">Problem</span>
-        </div>
-        <div class="meta-badges">
-          <span class="difficulty-badge" id="difficulty-display">Medium</span>
-          <span class="time-badge">⏱ ~15 min</span>
-        </div>
-      </div>
-
-      <h1 id="title" class="problem-title">Loading…</h1>
-
-      <div class="tag-row" id="tag-display"></div>
-
-      <div class="statement-card">
-        <div class="statement-label">// Problem Statement</div>
-        <pre id="question" class="problem-text"></pre>
-      </div>
-
-      <div class="hints-row" id="hints-section">
-        <div class="hint-chip" id="hint-toggle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          Show Hint
-        </div>
-        <div class="hint-chip" id="complexity-display" style="display:none">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          <span id="complexity-text"></span>
-        </div>
-      </div>
-      <div class="hint-box hidden" id="hint-box">
-        💡 Think about the brute-force approach first — then identify the repeated subproblems or dominant operations that can be optimized.
-      </div>
-    </section>
-
-    <!-- Language Tabs + Solutions -->
-    <section class="solutions-section">
-      <div class="solutions-header">
-        <h2 class="solutions-heading">// Solutions</h2>
-        <div class="lang-tabs" id="lang-tabs"></div>
-      </div>
-
-      <div id="solutions" class="solutions-list"></div>
-    </section>
-
-    <!-- Navigation -->
-    <div class="problem-nav" id="problem-nav">
-      <a id="prev-problem" href="#" class="nav-arrow nav-prev hidden">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        <span>Previous</span>
-      </a>
-      <a href="index.html" class="nav-home-btn">All Problems</a>
-      <a id="next-problem" href="#" class="nav-arrow nav-next hidden">
-        <span>Next</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+  <!-- Left: Problem statement -->
+  <div class="prob-left">
+    <div class="prob-breadcrumb">
+      <a href="index.html">Archive</a>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="m9 18 6-6-6-6"/></svg>
+      <span id="prob-crumb">…</span>
     </div>
 
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <span class="footer-brand">{DBATU CP}</span>
-      <span class="footer-copy">Open source · Built for students · DBATU Syllabus 2024</span>
-      <a href="https://github.com" class="footer-link" target="_blank">GitHub ↗</a>
+    <div class="prob-header">
+      <h1 id="prob-title" class="prob-title">Loading…</h1>
+      <div class="prob-badges">
+        <span id="prob-diff" class="pdiff medium">Medium</span>
+        <span class="prob-time">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          ~15 min
+        </span>
+      </div>
+      <div id="prob-tags" class="prob-tags"></div>
     </div>
-  </footer>
+
+    <div class="stmt-card">
+      <div class="stmt-top">
+        <span class="stmt-label">Problem Statement</span>
+        <span class="stmt-hint-btn" id="hint-btn">Show Hint</span>
+      </div>
+      <pre id="prob-q" class="prob-q"></pre>
+    </div>
+
+    <div id="hint-box" class="hint-box hidden">
+      💡 Start with the brute-force approach, identify repeated subproblems or the bottleneck operation, then optimize using appropriate data structures or algorithmic techniques.
+    </div>
+
+    <div id="prob-nav" class="prob-nav">
+      <a id="nav-prev" href="#" class="nav-btn hidden">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span id="prev-title">Previous</span>
+      </a>
+      <a href="index.html" class="nav-all">All Problems</a>
+      <a id="nav-next" href="#" class="nav-btn nav-btn-r hidden">
+        <span id="next-title">Next</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Right: Solutions -->
+  <div class="prob-right">
+    <div class="sol-header">
+      <span class="sol-heading">Solutions</span>
+      <div id="lang-tabs" class="lang-tabs"></div>
+    </div>
+    <div id="solutions"></div>
+  </div>
+
+</div>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  let allData = [];
-  let activeLanguage = null;
+const params = new URLSearchParams(location.search);
+const id     = params.get('id');
 
-  // Prism language map
-  const langMap = { cpp: 'cpp', python: 'python', java: 'java', c: 'c', javascript: 'javascript', js: 'javascript' };
-  const diffMap = { Easy: 'easy', Medium: 'medium', Hard: 'hard' };
-  const complexityMap = {
-    arrays: 'O(n) time · O(1) space', strings: 'O(n) time · O(n) space',
-    dp: 'O(n²) time · O(n) space', graphs: 'O(V+E) time · O(V) space',
-    trees: 'O(n) time · O(h) space', sorting: 'O(n log n) time · O(1) space'
-  };
+const langClass = { cpp:'cpp', python:'python', java:'java', c:'c', javascript:'javascript', js:'javascript' };
+const diffMap   = { Easy:'easy', Medium:'medium', Hard:'hard' };
 
-  fetch("data.json")
-    .then(res => res.json())
-    .then(data => {
-      allData = data;
-      const problem = data.find(p => p.id === id) || data[0];
-      if (!problem) return;
-      renderProblem(problem, data);
-    })
-    .catch(() => {
-      // Demo fallback
-      const demo = {
-        id: "1",
-        title: "Two Sum",
-        difficulty: "Easy",
-        tags: ["arrays"],
-        question: `Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+fetch('data.json')
+  .then(r => r.json())
+  .then(data => init(data))
+  .catch(() => {
+    const demo = [{
+      id:'1', title:'Two Sum', difficulty:'Easy', tags:['arrays'],
+      question:`Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
-
-You can return the answer in any order.
+You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
 
 Example 1:
-  Input:  nums = [2,7,11,15], target = 9
-  Output: [0,1]
-  Explanation: nums[0] + nums[1] = 2 + 7 = 9
+  Input:  nums = [2, 7, 11, 15], target = 9
+  Output: [0, 1]
+  Reason: nums[0] + nums[1] = 2 + 7 = 9
 
 Example 2:
-  Input:  nums = [3,2,4], target = 6
-  Output: [1,2]
+  Input:  nums = [3, 2, 4], target = 6
+  Output: [1, 2]
 
 Constraints:
   · 2 ≤ nums.length ≤ 10⁴
-  · -10⁹ ≤ nums[i] ≤ 10⁹
-  · Only one valid answer exists.`,
-        solutions: {
-          cpp: `#include <bits/stdc++.h>
+  · −10⁹ ≤ nums[i] ≤ 10⁹
+  · Exactly one valid answer exists.`,
+      solutions:{
+        cpp:`#include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int, int> seen;
-        
-        for (int i = 0; i < nums.size(); i++) {
-            int complement = target - nums[i];
-            
-            if (seen.count(complement)) {
-                return {seen[complement], i};
-            }
+        unordered_map<int,int> seen;
+        for (int i = 0; i < (int)nums.size(); i++) {
+            int need = target - nums[i];
+            if (seen.count(need))
+                return { seen[need], i };
             seen[nums[i]] = i;
         }
-        return {}; // unreachable
+        return {};
     }
 };
 
 int main() {
     Solution sol;
     vector<int> nums = {2, 7, 11, 15};
-    int target = 9;
-    
-    auto result = sol.twoSum(nums, target);
-    cout << "[" << result[0] << ", " << result[1] << "]" << endl;
-    return 0;
+    auto res = sol.twoSum(nums, 9);
+    cout << "[" << res[0] << ", " << res[1] << "]\\n";
 }`,
-          python: `class Solution:
+        python:`class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
         seen = {}
-        
         for i, num in enumerate(nums):
             complement = target - num
-            
             if complement in seen:
                 return [seen[complement], i]
-            
             seen[num] = i
-        
-        return []  # unreachable
+        return []
 
-# Driver code
 if __name__ == "__main__":
     sol = Solution()
-    nums = [2, 7, 11, 15]
-    target = 9
-    print(sol.twoSum(nums, target))  # [0, 1]`,
-          java: `import java.util.HashMap;
-import java.util.Map;
+    print(sol.twoSum([2, 7, 11, 15], 9))  # [0, 1]`,
+        java:`import java.util.*;
 
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> seen = new HashMap<>();
-        
+        Map<Integer,Integer> seen = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            int complement = target - nums[i];
-            
-            if (seen.containsKey(complement)) {
-                return new int[]{seen.get(complement), i};
-            }
+            int need = target - nums[i];
+            if (seen.containsKey(need))
+                return new int[]{ seen.get(need), i };
             seen.put(nums[i], i);
         }
-        return new int[]{}; // unreachable
+        return new int[]{};
     }
-    
+
     public static void main(String[] args) {
-        Solution sol = new Solution();
-        int[] nums = {2, 7, 11, 15};
-        int[] result = sol.twoSum(nums, 9);
-        System.out.println("[" + result[0] + ", " + result[1] + "]");
+        int[] res = new Solution().twoSum(new int[]{2,7,11,15}, 9);
+        System.out.println(Arrays.toString(res)); // [0, 1]
     }
 }`
-        }
-      };
-      allData = [demo];
-      renderProblem(demo, [demo]);
-    });
-
-  function renderProblem(problem, allProblems) {
-    document.title = `${problem.title} — DBATU CP`;
-    document.getElementById('title').textContent = problem.title;
-    document.getElementById('question').textContent = problem.question;
-    document.getElementById('problem-breadcrumb').textContent = problem.title;
-
-    // Difficulty
-    const diffEl = document.getElementById('difficulty-display');
-    const diff = problem.difficulty || 'Medium';
-    diffEl.textContent = diff;
-    diffEl.className = `difficulty-badge ${diffMap[diff] || 'medium'}`;
-
-    // Tags
-    const tagDisplay = document.getElementById('tag-display');
-    (problem.tags || []).forEach(t => {
-      const s = document.createElement('span');
-      s.className = 'tag-badge';
-      s.textContent = t;
-      tagDisplay.appendChild(s);
-
-      // Show complexity
-      if (complexityMap[t]) {
-        const compEl = document.getElementById('complexity-display');
-        document.getElementById('complexity-text').textContent = complexityMap[t];
-        compEl.style.display = 'flex';
       }
-    });
+    }];
+    init(demo);
+  });
 
-    // Prev / Next
-    const idx = allProblems.findIndex(p => p.id === problem.id);
-    if (idx > 0) {
-      const prev = document.getElementById('prev-problem');
-      prev.href = `problem.html?id=${allProblems[idx - 1].id}`;
-      prev.classList.remove('hidden');
-      prev.querySelector('span').textContent = allProblems[idx - 1].title;
-    }
-    if (idx < allProblems.length - 1) {
-      const next = document.getElementById('next-problem');
-      next.href = `problem.html?id=${allProblems[idx + 1].id}`;
-      next.classList.remove('hidden');
-      next.querySelector('span').textContent = allProblems[idx + 1].title;
-    }
+function init(data) {
+  const problem = data.find(p => p.id === id) || data[0];
+  if (!problem) return;
 
-    // Solutions
-    const solutions = problem.solutions || {};
-    const langs = Object.keys(solutions);
-    if (!langs.length) return;
+  document.title = `${problem.title} — DBATU CP`;
+  document.getElementById('prob-title').textContent = problem.title;
+  document.getElementById('prob-crumb').textContent = problem.title;
+  document.getElementById('prob-q').textContent     = problem.question;
 
-    activeLanguage = langs[0];
-    const tabsContainer = document.getElementById('lang-tabs');
-    const solutionsContainer = document.getElementById('solutions');
+  const diff = problem.difficulty || 'Medium';
+  const diffEl = document.getElementById('prob-diff');
+  diffEl.textContent = diff;
+  diffEl.className   = `pdiff ${diffMap[diff] || 'medium'}`;
 
-    langs.forEach((lang, i) => {
-      // Tab
-      const tab = document.createElement('button');
-      tab.className = `lang-tab${i === 0 ? ' active' : ''}`;
-      tab.textContent = lang.toUpperCase();
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        document.querySelectorAll('.solution-block').forEach(b => b.classList.add('hidden'));
-        document.getElementById(`sol-${lang}`).classList.remove('hidden');
-        activeLanguage = lang;
-      });
-      tabsContainer.appendChild(tab);
+  // Tags
+  const tagsWrap = document.getElementById('prob-tags');
+  (problem.tags || []).forEach(t => {
+    const s = document.createElement('span');
+    s.className = 'ptag'; s.textContent = t;
+    tagsWrap.appendChild(s);
+  });
 
-      // Code block
-      const block = document.createElement('div');
-      block.className = `solution-block${i === 0 ? '' : ' hidden'}`;
-      block.id = `sol-${lang}`;
-
-      const prismLang = langMap[lang.toLowerCase()] || 'clike';
-      const escaped = solutions[lang].replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-      block.innerHTML = `
-        <div class="code-toolbar">
-          <span class="code-lang-label">${lang.toUpperCase()}</span>
-          <div class="toolbar-actions">
-            <button class="copy-btn" data-lang="${lang}">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              Copy
-            </button>
-            <button class="raw-btn" data-lang="${lang}">Raw</button>
-          </div>
-        </div>
-        <div class="code-scroll-wrap">
-          <pre class="code-pre"><code class="language-${prismLang}" id="code-${lang}">${escaped}</code></pre>
-        </div>
-      `;
-
-      // Copy
-      block.querySelector('.copy-btn').addEventListener('click', function() {
-        navigator.clipboard.writeText(solutions[lang]).then(() => {
-          this.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
-          this.classList.add('copied');
-          setTimeout(() => {
-            this.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
-            this.classList.remove('copied');
-          }, 2000);
-        });
-      });
-
-      // Raw download
-      block.querySelector('.raw-btn').addEventListener('click', function() {
-        const extMap = { cpp: 'cpp', python: 'py', java: 'java', c: 'c', js: 'js', javascript: 'js' };
-        const ext = extMap[lang.toLowerCase()] || 'txt';
-        const blob = new Blob([solutions[lang]], { type: 'text/plain' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `${problem.title.replace(/\s+/g, '_')}.${ext}`;
-        a.click();
-      });
-
-      solutionsContainer.appendChild(block);
-    });
-
-    // Highlight
-    setTimeout(() => { if (window.Prism) Prism.highlightAll(); }, 100);
+  // Prev / Next
+  const idx = data.findIndex(p => p.id === problem.id);
+  if (idx > 0) {
+    const el = document.getElementById('nav-prev');
+    el.href = `problem.html?id=${data[idx-1].id}`;
+    el.classList.remove('hidden');
+    document.getElementById('prev-title').textContent = data[idx-1].title;
+  }
+  if (idx < data.length - 1) {
+    const el = document.getElementById('nav-next');
+    el.href = `problem.html?id=${data[idx+1].id}`;
+    el.classList.remove('hidden');
+    document.getElementById('next-title').textContent = data[idx+1].title;
   }
 
-  // Hint toggle
-  document.getElementById('hint-toggle').addEventListener('click', function() {
-    const box = document.getElementById('hint-box');
-    box.classList.toggle('hidden');
-    this.innerHTML = box.classList.contains('hidden')
-      ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Show Hint`
-      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Hide Hint`;
-  });
+  // Solutions
+  const sols  = problem.solutions || {};
+  const langs = Object.keys(sols);
+  if (!langs.length) return;
 
-  // Share
-  document.getElementById('share-btn').addEventListener('click', () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      const btn = document.getElementById('share-btn');
-      btn.style.color = 'var(--accent)';
-      setTimeout(() => btn.style.color = '', 2000);
+  const tabsWrap = document.getElementById('lang-tabs');
+  const solsWrap = document.getElementById('solutions');
+  let active = langs[0];
+
+  function showLang(lang) {
+    active = lang;
+    document.querySelectorAll('.ltab').forEach(t => t.classList.toggle('active', t.dataset.lang === lang));
+    document.querySelectorAll('.sol-block').forEach(b => b.classList.toggle('hidden', b.dataset.lang !== lang));
+  }
+
+  langs.forEach((lang, i) => {
+    // Tab
+    const tab = document.createElement('button');
+    tab.className   = `ltab${i===0?' active':''}`;
+    tab.dataset.lang= lang;
+    tab.textContent = lang.toUpperCase();
+    tab.addEventListener('click', () => showLang(lang));
+    tabsWrap.appendChild(tab);
+
+    // Block
+    const block = document.createElement('div');
+    block.className   = `sol-block${i===0?'':' hidden'}`;
+    block.dataset.lang= lang;
+
+    const cls = langClass[lang.toLowerCase()] || 'clike';
+    const escaped = (sols[lang]||'// No solution provided yet.').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+    block.innerHTML = `
+      <div class="code-bar">
+        <span class="code-lang">${lang.toUpperCase()}</span>
+        <div style="display:flex;gap:8px">
+          <button class="copy-btn" data-lang="${lang}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+          <button class="dl-btn" data-lang="${lang}">Download</button>
+        </div>
+      </div>
+      <div class="code-wrap">
+        <pre class="code-pre"><code class="language-${cls}" id="code-${lang}">${escaped}</code></pre>
+      </div>
+    `;
+
+    block.querySelector('.copy-btn').addEventListener('click', function() {
+      navigator.clipboard.writeText(sols[lang]).then(() => {
+        this.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        this.classList.add('copied');
+        setTimeout(() => {
+          this.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+          this.classList.remove('copied');
+        }, 2000);
+      });
     });
-  });
-</script>
 
+    block.querySelector('.dl-btn').addEventListener('click', () => {
+      const ext = {cpp:'cpp',python:'py',java:'java',c:'c',js:'js',javascript:'js'}[lang.toLowerCase()]||'txt';
+      const blob = new Blob([sols[lang]], {type:'text/plain'});
+      const a = Object.assign(document.createElement('a'), {href:URL.createObjectURL(blob), download:`${problem.title.replace(/\s+/g,'_')}.${ext}`});
+      a.click();
+    });
+
+    solsWrap.appendChild(block);
+  });
+
+  setTimeout(() => { if (window.Prism) Prism.highlightAll(); }, 120);
+}
+
+// Hint
+document.getElementById('hint-btn').addEventListener('click', function() {
+  const box = document.getElementById('hint-box');
+  box.classList.toggle('hidden');
+  this.textContent = box.classList.contains('hidden') ? 'Show Hint' : 'Hide Hint';
+});
+
+// Share
+document.getElementById('share-btn').addEventListener('click', function() {
+  navigator.clipboard.writeText(location.href).then(() => {
+    const orig = this.innerHTML;
+    this.textContent = '✓ Copied!';
+    setTimeout(() => { this.innerHTML = orig; }, 2000);
+  });
+});
+</script>
 </body>
 </html>

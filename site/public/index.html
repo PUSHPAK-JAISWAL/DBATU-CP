@@ -5,186 +5,182 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DBATU CP — Problem Archive</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Background grid -->
-  <div class="bg-grid"></div>
-  <div class="bg-glow"></div>
+<div class="noise"></div>
 
-  <header>
-    <div class="header-inner">
-      <div class="logo-block">
-        <span class="logo-bracket">{</span>
-        <div class="logo-text">
-          <span class="logo-title">DBATU</span>
-          <span class="logo-sub">Competitive Programming</span>
-        </div>
-        <span class="logo-bracket">}</span>
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-icon">&lt;/&gt;</div>
+      <div>
+        <div class="logo-name">DBATU CP</div>
+        <div class="logo-sub">Competitive Programming</div>
       </div>
-
-      <nav class="header-nav">
-        <span class="nav-tag active">All Problems</span>
-        <span class="nav-tag">Syllabus</span>
-        <span class="nav-tag">Contribute</span>
-      </nav>
-
-      <div class="search-wrapper">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-        <input class="search" id="search" placeholder="Search problems, topics...">
-        <span class="search-shortcut">⌘K</span>
-      </div>
+    </a>
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="search" class="search" placeholder="Search problems…" autocomplete="off" spellcheck="false">
     </div>
-  </header>
+  </div>
+</header>
 
-  <main class="container">
-    <div class="page-hero">
-      <div class="hero-label">// PROBLEM ARCHIVE</div>
-      <h1 class="hero-heading">Master Every<br><span class="accent-text">Algorithm</span></h1>
-      <p class="hero-sub">Curated competitive programming problems with solutions in C++, Python & Java — aligned to the DBATU syllabus.</p>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="pulse"></span>DBATU Syllabus 2024</div>
+    <h1 class="hero-h1">Master Every<br><span class="accent">Algorithm.</span></h1>
+    <p class="hero-p">Curated competitive programming problems with solutions in C++, Python &amp; Java — aligned to your university syllabus.</p>
+    <div class="stats-bar">
+      <div class="stat"><b id="total-count">—</b><span>Problems</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><b>3</b><span>Languages</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><b>∞</b><span>Practice</span></div>
+    </div>
+  </div>
+  <div class="hero-deco" aria-hidden="true">
+    <pre class="hero-code">
+<span class="hc-kw">int</span> <span class="hc-fn">solve</span>(<span class="hc-kw">int</span> n) {
+  <span class="hc-kw">if</span> (n &lt;= <span class="hc-num">1</span>) <span class="hc-kw">return</span> n;
+  <span class="hc-kw">return</span> <span class="hc-fn">solve</span>(n-<span class="hc-num">1</span>)
+       + <span class="hc-fn">solve</span>(n-<span class="hc-num">2</span>);
+}</pre>
+  </div>
+</div>
 
-      <div class="stats-row">
-        <div class="stat-chip"><span class="stat-num" id="total-count">—</span> Problems</div>
-        <div class="stat-chip"><span class="stat-num">3</span> Languages</div>
-        <div class="stat-chip"><span class="stat-num">∞</span> Practice</div>
-      </div>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sf-group">
+      <div class="sf-label">Difficulty</div>
+      <button class="sf active" data-diff="all">All</button>
+      <button class="sf diff-easy" data-diff="Easy">Easy</button>
+      <button class="sf diff-medium" data-diff="Medium">Medium</button>
+      <button class="sf diff-hard" data-diff="Hard">Hard</button>
+    </div>
+    <div class="sf-group">
+      <div class="sf-label">Topic</div>
+      <button class="sf active" data-tag="all">All Topics</button>
+      <button class="sf" data-tag="arrays">Arrays</button>
+      <button class="sf" data-tag="strings">Strings</button>
+      <button class="sf" data-tag="dp">Dynamic Prog.</button>
+      <button class="sf" data-tag="graphs">Graphs</button>
+      <button class="sf" data-tag="trees">Trees</button>
+      <button class="sf" data-tag="sorting">Sorting</button>
+      <button class="sf" data-tag="searching">Searching</button>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="list-bar">
+      <span id="res-count" class="res-count"></span>
+      <select id="sort" class="sort-sel">
+        <option value="default">Default order</option>
+        <option value="easy">Easy first</option>
+        <option value="hard">Hard first</option>
+        <option value="az">A → Z</option>
+      </select>
     </div>
 
-    <div class="filter-bar">
-      <span class="filter-label">Filter:</span>
-      <button class="filter-btn active" data-tag="all">All</button>
-      <button class="filter-btn" data-tag="arrays">Arrays</button>
-      <button class="filter-btn" data-tag="strings">Strings</button>
-      <button class="filter-btn" data-tag="dp">DP</button>
-      <button class="filter-btn" data-tag="graphs">Graphs</button>
-      <button class="filter-btn" data-tag="trees">Trees</button>
-      <button class="filter-btn" data-tag="sorting">Sorting</button>
-    </div>
+    <div id="problems"></div>
 
-    <div id="problems" class="problems-grid"></div>
-
-    <div id="empty-state" class="empty-state hidden">
-      <div class="empty-icon">⌀</div>
-      <p>No problems match your search.</p>
-      <small>Try a different keyword or clear the filter.</small>
+    <div id="empty" class="empty hidden">
+      <div>⌀</div>
+      <strong>No problems found</strong>
+      <span>Try a different keyword or clear filters.</span>
     </div>
-  </main>
+  </div>
+</div>
 
-  <footer>
-    <div class="footer-inner">
-      <span class="footer-brand">{DBATU CP}</span>
-      <span class="footer-copy">Open source · Built for students · DBATU Syllabus 2024</span>
-      <a href="https://github.com" class="footer-link" target="_blank">GitHub ↗</a>
-    </div>
-  </footer>
+<footer>
+  <div class="footer-inner">
+    <span>&lt;/&gt; DBATU CP</span>
+    <span>Open source · Built for DBATU students</span>
+    <a href="https://github.com" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</footer>
 
 <script>
-  let allProblems = [];
+let allProblems = [], activeDiff = 'all', activeTag = 'all';
+const diffRank = { Easy:1, Medium:2, Hard:3 };
 
-  const difficultyColors = { Easy: 'easy', Medium: 'medium', Hard: 'hard' };
-  const tagIcons = {
-    arrays: '[ ]', strings: '"..."', dp: '⊞', graphs: '⬡',
-    trees: '⊤', sorting: '↕', default: '#'
-  };
-
-  fetch("data.json")
-    .then(res => res.json())
-    .then(data => {
-      allProblems = data;
-      document.getElementById('total-count').textContent = data.length;
-      render(data);
-    })
-    .catch(() => {
-      // Demo mode: show placeholder cards
-      const demo = [
-        { id: "1", title: "Two Sum", question: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution.", difficulty: "Easy", tags: ["arrays"], solutions: { cpp: "", python: "" } },
-        { id: "2", title: "Longest Common Subsequence", question: "Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0.", difficulty: "Medium", tags: ["dp", "strings"], solutions: { cpp: "", python: "", java: "" } },
-        { id: "3", title: "Dijkstra's Shortest Path", question: "Given a weighted graph and a source vertex, find the shortest path from the source to all other vertices using Dijkstra's algorithm.", difficulty: "Hard", tags: ["graphs"], solutions: { cpp: "" } },
-        { id: "4", title: "Binary Search Tree Traversal", question: "Implement inorder, preorder, and postorder traversals of a binary search tree. Return the nodes in each traversal order.", difficulty: "Easy", tags: ["trees"], solutions: { cpp: "", java: "" } },
-        { id: "5", title: "Merge Sort Implementation", question: "Implement the merge sort algorithm and analyze its time complexity. Demonstrate sorting of an integer array.", difficulty: "Medium", tags: ["sorting", "arrays"], solutions: { cpp: "", python: "" } },
-        { id: "6", title: "0/1 Knapsack Problem", question: "Given weights and values of n items, and a capacity W, determine the maximum value that can be put in a knapsack of capacity W.", difficulty: "Hard", tags: ["dp"], solutions: { cpp: "", python: "", java: "" } },
-      ];
-      allProblems = demo;
-      document.getElementById('total-count').textContent = demo.length;
-      render(demo);
-    });
-
-  function render(data) {
-    const container = document.getElementById("problems");
-    const empty = document.getElementById("empty-state");
-    container.innerHTML = "";
-
-    if (data.length === 0) {
-      empty.classList.remove('hidden');
-      return;
-    }
-    empty.classList.add('hidden');
-
-    data.forEach((problem, i) => {
-      const div = document.createElement("div");
-      div.className = "card";
-      div.style.animationDelay = `${i * 60}ms`;
-
-      const langs = problem.solutions ? Object.keys(problem.solutions) : ['cpp'];
-      const langBadges = langs.map(l => `<span class="lang-badge">${l}</span>`).join('');
-      const tags = (problem.tags || ['arrays']).map(t =>
-        `<span class="tag-badge">${tagIcons[t] || tagIcons.default} ${t}</span>`
-      ).join('');
-      const diff = problem.difficulty || 'Medium';
-
-      div.innerHTML = `
-        <div class="card-header">
-          <span class="problem-number">${String(i + 1).padStart(2, '0')}</span>
-          <span class="difficulty-badge ${(difficultyColors[diff] || 'medium')}">${diff}</span>
-        </div>
-        <h3 class="card-title">${problem.title}</h3>
-        <p class="card-excerpt">${problem.question.substring(0, 160)}…</p>
-        <div class="card-meta">
-          <div class="tag-row">${tags}</div>
-          <div class="lang-row">${langBadges}</div>
-        </div>
-        <a href="problem.html?id=${problem.id}" class="card-link">
-          <span>View Solutions</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      `;
-      container.appendChild(div);
-    });
-  }
-
-  document.getElementById("search").addEventListener("input", e => {
-    const value = e.target.value.toLowerCase();
-    const filtered = allProblems.filter(p =>
-      p.title.toLowerCase().includes(value) ||
-      p.question.toLowerCase().includes(value) ||
-      (p.tags || []).some(t => t.includes(value))
-    );
-    render(filtered);
+fetch("data.json")
+  .then(r => r.json())
+  .then(data => { allProblems = data; document.getElementById('total-count').textContent = data.length; applyFilters(); })
+  .catch(() => {
+    allProblems = [
+      {id:"1",title:"Two Sum",difficulty:"Easy",tags:["arrays"],question:"Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume exactly one solution exists and you may not use the same element twice.",solutions:{cpp:"",python:"",java:""}},
+      {id:"2",title:"Longest Common Subsequence",difficulty:"Medium",tags:["dp","strings"],question:"Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0. A subsequence is a sequence derived from another by deleting some elements without changing the order.",solutions:{cpp:"",python:""}},
+      {id:"3",title:"Dijkstra's Shortest Path",difficulty:"Hard",tags:["graphs"],question:"Given a weighted directed graph and a source vertex, find the shortest distance from the source to all other vertices using Dijkstra's greedy algorithm with a priority queue.",solutions:{cpp:""}},
+      {id:"4",title:"BST Traversal",difficulty:"Easy",tags:["trees"],question:"Implement inorder, preorder, and postorder traversals of a binary search tree. Return the node values in each traversal order as an array.",solutions:{cpp:"",java:""}},
+      {id:"5",title:"Merge Sort",difficulty:"Medium",tags:["sorting"],question:"Implement the merge sort algorithm. Analyze its time and space complexity. Demonstrate sorting of an integer array and compare with quicksort.",solutions:{cpp:"",python:""}},
+      {id:"6",title:"0/1 Knapsack",difficulty:"Hard",tags:["dp"],question:"Given weights and values of n items and knapsack capacity W, determine the maximum value achievable. Each item can be included at most once. Use dynamic programming.",solutions:{cpp:"",python:"",java:""}},
+      {id:"7",title:"Binary Search",difficulty:"Easy",tags:["searching"],question:"Given an array of integers sorted in ascending order and a target, return the index using binary search. Return -1 if not found. Implement both iterative and recursive versions.",solutions:{cpp:"",python:"",java:""}},
+      {id:"8",title:"Kruskal's MST",difficulty:"Hard",tags:["graphs"],question:"Find the minimum spanning tree of a connected undirected weighted graph using Kruskal's algorithm with Union-Find data structure.",solutions:{cpp:""}},
+      {id:"9",title:"String Palindrome Check",difficulty:"Easy",tags:["strings"],question:"Write a function to check if a given string is a palindrome, considering only alphanumeric characters and ignoring case. Return true or false.",solutions:{cpp:"",python:""}},
+      {id:"10",title:"Matrix Chain Multiplication",difficulty:"Hard",tags:["dp"],question:"Given a chain of matrices, find the minimum number of scalar multiplications needed to compute the product. Use dynamic programming to avoid redundant computations.",solutions:{cpp:""}},
+    ];
+    document.getElementById('total-count').textContent = allProblems.length;
+    applyFilters();
   });
 
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tag = btn.dataset.tag;
-      const filtered = tag === 'all' ? allProblems :
-        allProblems.filter(p => (p.tags || []).includes(tag));
-      render(filtered);
-    });
+function applyFilters() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const s = document.getElementById('sort').value;
+  let list = allProblems.filter(p => {
+    if (activeDiff !== 'all' && p.difficulty !== activeDiff) return false;
+    if (activeTag  !== 'all' && !(p.tags||[]).includes(activeTag)) return false;
+    if (q && !p.title.toLowerCase().includes(q) && !p.question.toLowerCase().includes(q) && !(p.tags||[]).some(t=>t.includes(q))) return false;
+    return true;
   });
+  if (s==='easy') list.sort((a,b)=>(diffRank[a.difficulty]||2)-(diffRank[b.difficulty]||2));
+  if (s==='hard') list.sort((a,b)=>(diffRank[b.difficulty]||2)-(diffRank[a.difficulty]||2));
+  if (s==='az')   list.sort((a,b)=>a.title.localeCompare(b.title));
+  render(list);
+}
 
-  // Keyboard shortcut for search
-  document.addEventListener('keydown', e => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-      e.preventDefault();
-      document.getElementById('search').focus();
-    }
+function render(data) {
+  const wrap = document.getElementById('problems');
+  const empty = document.getElementById('empty');
+  document.getElementById('res-count').textContent = `${data.length} problem${data.length!==1?'s':''}`;
+  wrap.innerHTML = '';
+  if (!data.length) { empty.classList.remove('hidden'); return; }
+  empty.classList.add('hidden');
+  data.forEach((p, i) => {
+    const d = p.difficulty||'Medium';
+    const langs = Object.keys(p.solutions||{cpp:''});
+    const a = document.createElement('a');
+    a.href = `problem.html?id=${p.id}`;
+    a.className = 'prow';
+    a.style.animationDelay = `${Math.min(i*35,500)}ms`;
+    a.innerHTML = `
+      <span class="pnum">${String(i+1).padStart(2,'0')}</span>
+      <div class="prow-body">
+        <span class="prow-title">${p.title}</span>
+        <span class="prow-excerpt">${p.question.substring(0,130)}…</span>
+      </div>
+      <div class="prow-meta">
+        ${(p.tags||[]).slice(0,2).map(t=>`<span class="ptag">${t}</span>`).join('')}
+        ${langs.slice(0,3).map(l=>`<span class="plang">${l.toUpperCase()}</span>`).join('')}
+        <span class="pdiff ${d.toLowerCase()}">${d}</span>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;opacity:.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    `;
+    wrap.appendChild(a);
   });
+}
+
+document.getElementById('search').addEventListener('input', applyFilters);
+document.getElementById('sort').addEventListener('change', applyFilters);
+document.querySelectorAll('.sf[data-diff]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.sf[data-diff]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); activeDiff = b.dataset.diff; applyFilters();
+}));
+document.querySelectorAll('.sf[data-tag]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.sf[data-tag]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); activeTag = b.dataset.tag; applyFilters();
+}));
+document.addEventListener('keydown', e => { if ((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();document.getElementById('search').focus();} });
 </script>
-
 </body>
 </html>
