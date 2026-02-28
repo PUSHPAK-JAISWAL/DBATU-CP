@@ -21,9 +21,21 @@ const languageMap = {
 
 function extractPDFText(filePath) {
   try {
-    const text = execSync(`pdftotext "${filePath}" -`, {
+    const raw = execSync(`pdftotext "${filePath}" -layout -nopgbrk -`, {
       encoding: "utf-8"
     });
+
+    let text = raw;
+
+    // Remove page numbers like "2/2"
+    text = text.replace(/\n?\d+\/\d+\n?/g, "");
+
+    // Remove repeated footer lines (Valladolid etc.)
+    text = text.replace(/Universidad.*?\n/g, "");
+
+    // Remove excessive newlines
+    text = text.replace(/\n{3,}/g, "\n\n");
+
     return text.trim();
   } catch (err) {
     console.error("PDF extraction failed:", filePath);
@@ -61,9 +73,11 @@ function build() {
       path.join(folderPath, pdfFile)
     );
 
+    const firstLine = questionText.split("\n")[0].trim();
+
     problems.push({
       id: folder,
-      title: folder,
+      title: firstLine.length > 5 ? firstLine : folder,
       question: questionText,
       solutions
     });
