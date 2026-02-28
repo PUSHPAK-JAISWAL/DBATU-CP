@@ -1,11 +1,11 @@
-import { readFileSync, readdirSync, statSync, existsSync, mkdirSync, writeFileSync } from "fs";
-import { join, extname } from "path";
-import pdfModule from "pdf-parse";
-const pdf = pdfModule || pdfModule;
+const fs = require("fs");
+const path = require("path");
+const pdfModule = require("pdf-parse");
+const pdf = pdfModule.default || pdfModule;
 
-const ROOT = join(__dirname, "..");
-const OUTPUT_DIR = join(__dirname, "public");
-const DATA_FILE = join(OUTPUT_DIR, "data.json");
+const ROOT = path.join(__dirname, "..");
+const OUTPUT_DIR = path.join(__dirname, "public");
+const DATA_FILE = path.join(OUTPUT_DIR, "data.json");
 
 const languageMap = {
   ".cpp": "C++",
@@ -27,16 +27,16 @@ async function extractPDFText(filePath) {
 }
 
 async function build() {
-  const folders = readdirSync(ROOT);
+  const folders = fs.readdirSync(ROOT);
   const problems = [];
 
   for (const folder of folders) {
-    const folderPath = join(ROOT, folder);
+    const folderPath = path.join(ROOT, folder);
 
-    if (!statSync(folderPath).isDirectory()) continue;
-    if (folder === "site" || folder === ".github") continue;
+    if (!fs.statSync(folderPath).isDirectory()) continue;
+    if (folder === "site" || folder === ".github" || folder === "node_modules") continue;
 
-    const files = readdirSync(folderPath);
+    const files = fs.readdirSync(folderPath);
 
     const pdfFile = files.find(f => f.endsWith(".pdf"));
     if (!pdfFile) continue;
@@ -44,9 +44,9 @@ async function build() {
     const solutions = {};
 
     for (const file of files) {
-      const ext = extname(file);
+      const ext = path.extname(file);
       if (languageMap[ext]) {
-        const code = readFileSync(join(folderPath, file), "utf-8");
+        const code = fs.readFileSync(path.join(folderPath, file), "utf-8");
         solutions[languageMap[ext]] = code;
       }
     }
@@ -54,7 +54,7 @@ async function build() {
     if (Object.keys(solutions).length === 0) continue;
 
     const questionText = await extractPDFText(
-      join(folderPath, pdfFile)
+      path.join(folderPath, pdfFile)
     );
 
     problems.push({
@@ -65,12 +65,12 @@ async function build() {
     });
   }
 
-  if (!existsSync(OUTPUT_DIR)) {
-    mkdirSync(OUTPUT_DIR, { recursive: true });
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   }
 
-  writeFileSync(DATA_FILE, JSON.stringify(problems, null, 2));
-  console.log("Site data generated successfully.");
+  fs.writeFileSync(DATA_FILE, JSON.stringify(problems, null, 2));
+  console.log("✅ Site data generated successfully.");
 }
 
 build();
