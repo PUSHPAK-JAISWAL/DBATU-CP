@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const pdfjsLib = require("pdfjs-dist/legacy/build/pdf.js");
+const { execSync } = require("child_process");
 
 const ROOT = path.join(__dirname, "..");
 const OUTPUT_DIR = path.join(__dirname, "public");
@@ -19,23 +19,19 @@ const languageMap = {
   ".v": "V"
 };
 
-async function extractPDFText(filePath) {
-  const data = new Uint8Array(fs.readFileSync(filePath));
-  const pdf = await pdfjsLib.getDocument({ data }).promise;
-
-  let text = "";
-
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
-    const content = await page.getTextContent();
-    const strings = content.items.map(item => item.str);
-    text += strings.join(" ") + "\n";
+function extractPDFText(filePath) {
+  try {
+    const text = execSync(`pdftotext "${filePath}" -`, {
+      encoding: "utf-8"
+    });
+    return text.trim();
+  } catch (err) {
+    console.error("PDF extraction failed:", filePath);
+    return "";
   }
-
-  return text.trim();
 }
 
-async function build() {
+function build() {
   const folders = fs.readdirSync(ROOT);
   const problems = [];
 
@@ -61,7 +57,7 @@ async function build() {
 
     if (Object.keys(solutions).length === 0) continue;
 
-    const questionText = await extractPDFText(
+    const questionText = extractPDFText(
       path.join(folderPath, pdfFile)
     );
 
