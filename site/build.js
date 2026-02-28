@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const pdfModule = require("pdf-parse");
-const pdf = pdfModule.default || pdfModule;
+const pdfjsLib = require("pdfjs-dist/legacy/build/pdf.js");
 
 const ROOT = path.join(__dirname, "..");
 const OUTPUT_DIR = path.join(__dirname, "public");
@@ -21,9 +20,19 @@ const languageMap = {
 };
 
 async function extractPDFText(filePath) {
-  const dataBuffer = fs.readFileSync(filePath);
-  const data = await pdf(dataBuffer);
-  return data.text ? data.text.trim() : "";
+  const data = new Uint8Array(fs.readFileSync(filePath));
+  const pdf = await pdfjsLib.getDocument({ data }).promise;
+
+  let text = "";
+
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    const strings = content.items.map(item => item.str);
+    text += strings.join(" ") + "\n";
+  }
+
+  return text.trim();
 }
 
 async function build() {
@@ -34,10 +43,9 @@ async function build() {
     const folderPath = path.join(ROOT, folder);
 
     if (!fs.statSync(folderPath).isDirectory()) continue;
-    if (folder === "site" || folder === ".github" || folder === "node_modules") continue;
+    if (["site", ".github", "node_modules"].includes(folder)) continue;
 
     const files = fs.readdirSync(folderPath);
-
     const pdfFile = files.find(f => f.endsWith(".pdf"));
     if (!pdfFile) continue;
 
