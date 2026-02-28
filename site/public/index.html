@@ -1,35 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DBATU CP — Problem Archive</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
 <body>
 
-<header>
-  <h1>DBATU Competitive Programming</h1>
-  <input class="search" id="search" placeholder="Search problem...">
-</header>
+  <!-- Background grid -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
 
-<div class="container">
-  <div id="problems"></div>
-</div>
+  <header>
+    <div class="header-inner">
+      <div class="logo-block">
+        <span class="logo-bracket">{</span>
+        <div class="logo-text">
+          <span class="logo-title">DBATU</span>
+          <span class="logo-sub">Competitive Programming</span>
+        </div>
+        <span class="logo-bracket">}</span>
+      </div>
+
+      <nav class="header-nav">
+        <span class="nav-tag active">All Problems</span>
+        <span class="nav-tag">Syllabus</span>
+        <span class="nav-tag">Contribute</span>
+      </nav>
+
+      <div class="search-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input class="search" id="search" placeholder="Search problems, topics...">
+        <span class="search-shortcut">⌘K</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-hero">
+      <div class="hero-label">// PROBLEM ARCHIVE</div>
+      <h1 class="hero-heading">Master Every<br><span class="accent-text">Algorithm</span></h1>
+      <p class="hero-sub">Curated competitive programming problems with solutions in C++, Python & Java — aligned to the DBATU syllabus.</p>
+
+      <div class="stats-row">
+        <div class="stat-chip"><span class="stat-num" id="total-count">—</span> Problems</div>
+        <div class="stat-chip"><span class="stat-num">3</span> Languages</div>
+        <div class="stat-chip"><span class="stat-num">∞</span> Practice</div>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" data-tag="all">All</button>
+      <button class="filter-btn" data-tag="arrays">Arrays</button>
+      <button class="filter-btn" data-tag="strings">Strings</button>
+      <button class="filter-btn" data-tag="dp">DP</button>
+      <button class="filter-btn" data-tag="graphs">Graphs</button>
+      <button class="filter-btn" data-tag="trees">Trees</button>
+      <button class="filter-btn" data-tag="sorting">Sorting</button>
+    </div>
+
+    <div id="problems" class="problems-grid"></div>
+
+    <div id="empty-state" class="empty-state hidden">
+      <div class="empty-icon">⌀</div>
+      <p>No problems match your search.</p>
+      <small>Try a different keyword or clear the filter.</small>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-brand">{DBATU CP}</span>
+      <span class="footer-copy">Open source · Built for students · DBATU Syllabus 2024</span>
+      <a href="https://github.com" class="footer-link" target="_blank">GitHub ↗</a>
+    </div>
+  </footer>
 
 <script>
   let allProblems = [];
+
+  const difficultyColors = { Easy: 'easy', Medium: 'medium', Hard: 'hard' };
+  const tagIcons = {
+    arrays: '[ ]', strings: '"..."', dp: '⊞', graphs: '⬡',
+    trees: '⊤', sorting: '↕', default: '#'
+  };
 
   fetch("data.json")
     .then(res => res.json())
     .then(data => {
       allProblems = data;
+      document.getElementById('total-count').textContent = data.length;
       render(data);
+    })
+    .catch(() => {
+      // Demo mode: show placeholder cards
+      const demo = [
+        { id: "1", title: "Two Sum", question: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution.", difficulty: "Easy", tags: ["arrays"], solutions: { cpp: "", python: "" } },
+        { id: "2", title: "Longest Common Subsequence", question: "Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0.", difficulty: "Medium", tags: ["dp", "strings"], solutions: { cpp: "", python: "", java: "" } },
+        { id: "3", title: "Dijkstra's Shortest Path", question: "Given a weighted graph and a source vertex, find the shortest path from the source to all other vertices using Dijkstra's algorithm.", difficulty: "Hard", tags: ["graphs"], solutions: { cpp: "" } },
+        { id: "4", title: "Binary Search Tree Traversal", question: "Implement inorder, preorder, and postorder traversals of a binary search tree. Return the nodes in each traversal order.", difficulty: "Easy", tags: ["trees"], solutions: { cpp: "", java: "" } },
+        { id: "5", title: "Merge Sort Implementation", question: "Implement the merge sort algorithm and analyze its time complexity. Demonstrate sorting of an integer array.", difficulty: "Medium", tags: ["sorting", "arrays"], solutions: { cpp: "", python: "" } },
+        { id: "6", title: "0/1 Knapsack Problem", question: "Given weights and values of n items, and a capacity W, determine the maximum value that can be put in a knapsack of capacity W.", difficulty: "Hard", tags: ["dp"], solutions: { cpp: "", python: "", java: "" } },
+      ];
+      allProblems = demo;
+      document.getElementById('total-count').textContent = demo.length;
+      render(demo);
     });
 
   function render(data) {
     const container = document.getElementById("problems");
+    const empty = document.getElementById("empty-state");
     container.innerHTML = "";
 
-    data.forEach(problem => {
+    if (data.length === 0) {
+      empty.classList.remove('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+
+    data.forEach((problem, i) => {
       const div = document.createElement("div");
       div.className = "card";
+      div.style.animationDelay = `${i * 60}ms`;
+
+      const langs = problem.solutions ? Object.keys(problem.solutions) : ['cpp'];
+      const langBadges = langs.map(l => `<span class="lang-badge">${l}</span>`).join('');
+      const tags = (problem.tags || ['arrays']).map(t =>
+        `<span class="tag-badge">${tagIcons[t] || tagIcons.default} ${t}</span>`
+      ).join('');
+      const diff = problem.difficulty || 'Medium';
+
       div.innerHTML = `
-        <h3>${problem.title}</h3>
-        <p>${problem.question.substring(0, 180)}...</p>
-        <a href="problem.html?id=${problem.id}">View Solutions →</a>
+        <div class="card-header">
+          <span class="problem-number">${String(i + 1).padStart(2, '0')}</span>
+          <span class="difficulty-badge ${(difficultyColors[diff] || 'medium')}">${diff}</span>
+        </div>
+        <h3 class="card-title">${problem.title}</h3>
+        <p class="card-excerpt">${problem.question.substring(0, 160)}…</p>
+        <div class="card-meta">
+          <div class="tag-row">${tags}</div>
+          <div class="lang-row">${langBadges}</div>
+        </div>
+        <a href="problem.html?id=${problem.id}" class="card-link">
+          <span>View Solutions</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       `;
       container.appendChild(div);
     });
@@ -37,14 +158,33 @@
 
   document.getElementById("search").addEventListener("input", e => {
     const value = e.target.value.toLowerCase();
-
     const filtered = allProblems.filter(p =>
       p.title.toLowerCase().includes(value) ||
-      p.question.toLowerCase().includes(value)
+      p.question.toLowerCase().includes(value) ||
+      (p.tags || []).some(t => t.includes(value))
     );
-
     render(filtered);
+  });
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      const filtered = tag === 'all' ? allProblems :
+        allProblems.filter(p => (p.tags || []).includes(tag));
+      render(filtered);
+    });
+  });
+
+  // Keyboard shortcut for search
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      document.getElementById('search').focus();
+    }
   });
 </script>
 
 </body>
+</html>
