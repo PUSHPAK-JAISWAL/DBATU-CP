@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Problem</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 </head>
 <body>
   <a href="index.html">← Back</a>
@@ -34,7 +36,7 @@
           block.innerHTML = `
             <h3>${lang}</h3>
             <button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText)">Copy</button>
-            <pre>${code.replace(/</g,"&lt;")}</pre>
+            <pre><code class="language-${lang.toLowerCase()}">${code.replace(/</g,"&lt;")}</code></pre>
           `;
 
           container.appendChild(block);

@@ -1,31 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>DBATU Competitive Programming</title>
-  <link rel="stylesheet" href="style.css">
-</head>
 <body>
+
+<header>
   <h1>DBATU Competitive Programming</h1>
+  <input class="search" id="search" placeholder="Search problem...">
+</header>
+
+<div class="container">
   <div id="problems"></div>
+</div>
 
-  <script>
-    fetch("data.json")
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById("problems");
+<script>
+  let allProblems = [];
 
-        data.forEach(problem => {
-          const div = document.createElement("div");
-          div.className = "card";
-          div.innerHTML = `
-            <h3>${problem.title}</h3>
-            <p>${problem.question.substring(0, 200)}...</p>
-            <a href="problem.html?id=${problem.id}">View Solutions</a>
-          `;
-          container.appendChild(div);
-        });
-      });
-  </script>
+  fetch("data.json")
+    .then(res => res.json())
+    .then(data => {
+      allProblems = data;
+      render(data);
+    });
+
+  function render(data) {
+    const container = document.getElementById("problems");
+    container.innerHTML = "";
+
+    data.forEach(problem => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `
+        <h3>${problem.title}</h3>
+        <p>${problem.question.substring(0, 180)}...</p>
+        <a href="problem.html?id=${problem.id}">View Solutions →</a>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  document.getElementById("search").addEventListener("input", e => {
+    const value = e.target.value.toLowerCase();
+
+    const filtered = allProblems.filter(p =>
+      p.title.toLowerCase().includes(value) ||
+      p.question.toLowerCase().includes(value)
+    );
+
+    render(filtered);
+  });
+</script>
+
 </body>
-</html>
