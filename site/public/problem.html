@@ -5,30 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Problem — DBATU CP</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-r.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js" defer></script>
 </head>
 <body class="prob-page">
-
-<div class="noise"></div>
 
 <header>
   <div class="header-inner">
     <a class="back-btn" href="index.html">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Archive
     </a>
     <a class="logo" href="index.html">
       <div class="logo-icon">&lt;/&gt;</div>
-      <div>
-        <div class="logo-name">DBATU CP</div>
-        <div class="logo-sub">Competitive Programming</div>
+      <div class="logo-text">
+        <span class="logo-name">DBATU CP</span>
+        <span class="logo-sub">Competitive Programming</span>
       </div>
     </a>
-    <button id="share-btn" class="share-btn" title="Copy link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    <button id="share-btn" class="share-btn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       Share
     </button>
   </div>
@@ -36,174 +37,236 @@
 
 <div class="prob-layout">
 
-  <!-- Left: Problem statement -->
-  <div class="prob-left">
-    <div class="prob-breadcrumb">
+  <!-- LEFT: Problem Statement -->
+  <aside class="prob-left">
+    <nav class="breadcrumb">
       <a href="index.html">Archive</a>
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="m9 18 6-6-6-6"/></svg>
-      <span id="prob-crumb">…</span>
-    </div>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="m9 18 6-6-6-6"/></svg>
+      <span id="crumb-title">Problem</span>
+    </nav>
 
-    <div class="prob-header">
-      <h1 id="prob-title" class="prob-title">Loading…</h1>
-      <div class="prob-badges">
-        <span id="prob-diff" class="pdiff medium">Medium</span>
-        <span class="prob-time">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          ~15 min
+    <h1 id="prob-title" class="prob-title">—</h1>
+
+    <div class="prob-lang-count" id="prob-lang-count"></div>
+
+    <div class="stmt-block">
+      <div class="stmt-header">
+        <span class="stmt-label">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Problem Statement
         </span>
       </div>
-      <div id="prob-tags" class="prob-tags"></div>
-    </div>
-
-    <div class="stmt-card">
-      <div class="stmt-top">
-        <span class="stmt-label">Problem Statement</span>
-        <span class="stmt-hint-btn" id="hint-btn">Show Hint</span>
+      <div class="stmt-scroll">
+        <pre id="prob-q" class="prob-q"></pre>
       </div>
-      <pre id="prob-q" class="prob-q"></pre>
     </div>
 
-    <div id="hint-box" class="hint-box hidden">
-      💡 Start with the brute-force approach, identify repeated subproblems or the bottleneck operation, then optimize using appropriate data structures or algorithmic techniques.
-    </div>
-
-    <div id="prob-nav" class="prob-nav">
-      <a id="nav-prev" href="#" class="nav-btn hidden">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        <span id="prev-title">Previous</span>
+    <div class="prob-nav">
+      <a id="nav-prev" href="#" class="nav-pill hidden">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span id="prev-label">Prev</span>
       </a>
-      <a href="index.html" class="nav-all">All Problems</a>
-      <a id="nav-next" href="#" class="nav-btn nav-btn-r hidden">
-        <span id="next-title">Next</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a href="index.html" class="nav-all-pill">All Problems</a>
+      <a id="nav-next" href="#" class="nav-pill nav-pill-r hidden">
+        <span id="next-label">Next</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
-  </div>
+  </aside>
 
-  <!-- Right: Solutions -->
-  <div class="prob-right">
-    <div class="sol-header">
-      <span class="sol-heading">Solutions</span>
-      <div id="lang-tabs" class="lang-tabs"></div>
+  <!-- RIGHT: Solutions -->
+  <main class="prob-right">
+    <div class="sol-topbar">
+      <div class="sol-tabs-wrap">
+        <div id="lang-tabs" class="lang-tabs"></div>
+      </div>
     </div>
     <div id="solutions"></div>
-  </div>
+  </main>
 
 </div>
 
 <script>
-const params = new URLSearchParams(location.search);
-const id     = params.get('id');
+const id = new URLSearchParams(location.search).get('id');
+const langMap = {
+  cpp:'cpp','c++':'cpp', c:'c', python:'python', java:'java',
+  javascript:'javascript', js:'javascript', typescript:'typescript', ts:'typescript',
+  bash:'bash', r:'r', v:'markup', arduino:'cpp'
+};
 
-const langClass = { cpp:'cpp', python:'python', java:'java', c:'c', javascript:'javascript', js:'javascript' };
-const diffMap   = { Easy:'easy', Medium:'medium', Hard:'hard' };
+function cleanTitle(raw) {
+  return raw.replace(/^\d+\s+/, '').trim();
+}
 
 fetch('data.json')
   .then(r => r.json())
-  .then(data => init(data))
+  .then(data => loadProblem(data))
   .catch(() => {
-    const demo = [{
-      id:'1', title:'Two Sum', difficulty:'Easy', tags:['arrays'],
-      question:`Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+    loadProblem([{
+      id:'3nplus1',
+      title:'100       The 3n + 1 problem',
+      question:`Problems in Computer Science are often classified as belonging to a certain class of problems (e.g., NP, Unsolvable, Recursive). In this problem you will be analyzing a property of an algorithm whose classification is not known for all possible inputs.
 
-You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
+Consider the following algorithm:
 
-Example 1:
-  Input:  nums = [2, 7, 11, 15], target = 9
-  Output: [0, 1]
-  Reason: nums[0] + nums[1] = 2 + 7 = 9
+  1.  input n
+  2.  print n
+  3.  if n = 1 then STOP
+  4.       if n is odd then n ← 3n + 1
+  5.       else n ← n/2
+  6.  GOTO 2
 
-Example 2:
-  Input:  nums = [3, 2, 4], target = 6
-  Output: [1, 2]
+Given the input 22, the following sequence of numbers will be printed:
+  22 11 34 17 52 26 13 40 20 10 5 16 8 4 2 1
 
-Constraints:
-  · 2 ≤ nums.length ≤ 10⁴
-  · −10⁹ ≤ nums[i] ≤ 10⁹
-  · Exactly one valid answer exists.`,
+It is conjectured that the algorithm above will terminate (when a 1 is printed) for any integral input value.
+
+Given an input n, it is possible to determine the number of numbers printed before and including the 1 is printed. For a given n this is called the cycle-length of n. In the example above, the cycle length of 22 is 16.
+
+For any two numbers i and j you are to determine the maximum cycle length over all numbers between and including both i and j.
+
+Input
+The input will consist of a series of pairs of integers i and j, one pair per line. All integers will be less than 10,000 and greater than 0.
+
+Output
+For each pair output i, j, and the maximum cycle length, separated by at least one space.
+
+Sample Input     Sample Output
+1 10             1 10 20
+100 200          100 200 125
+201 210          201 210 89
+900 1000         900 1000 174`,
       solutions:{
-        cpp:`#include <bits/stdc++.h>
-using namespace std;
+        C:`#include <stdio.h>
+#define MAX 1000000
+long memo[MAX] = {0};
 
-class Solution {
-public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int> seen;
-        for (int i = 0; i < (int)nums.size(); i++) {
-            int need = target - nums[i];
-            if (seen.count(need))
-                return { seen[need], i };
-            seen[nums[i]] = i;
-        }
-        return {};
-    }
-};
+long cycleLength(long n) {
+    if (n == 1) return 1;
+    if (n < MAX && memo[n] != 0) return memo[n];
+
+    long length;
+    if (n % 2 == 0) length = 1 + cycleLength(n / 2);
+    else            length = 1 + cycleLength(3 * n + 1);
+
+    if (n < MAX) memo[n] = length;
+    return length;
+}
 
 int main() {
-    Solution sol;
-    vector<int> nums = {2, 7, 11, 15};
-    auto res = sol.twoSum(nums, 9);
-    cout << "[" << res[0] << ", " << res[1] << "]\\n";
-}`,
-        python:`class Solution:
-    def twoSum(self, nums: list[int], target: int) -> list[int]:
-        seen = {}
-        for i, num in enumerate(nums):
-            complement = target - num
-            if complement in seen:
-                return [seen[complement], i]
-            seen[num] = i
-        return []
-
-if __name__ == "__main__":
-    sol = Solution()
-    print(sol.twoSum([2, 7, 11, 15], 9))  # [0, 1]`,
-        java:`import java.util.*;
-
-class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        Map<Integer,Integer> seen = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int need = target - nums[i];
-            if (seen.containsKey(need))
-                return new int[]{ seen.get(need), i };
-            seen.put(nums[i], i);
+    long i, j;
+    while (scanf("%ld %ld", &i, &j) == 2) {
+        long start = i < j ? i : j;
+        long end   = i > j ? i : j;
+        long maxCycle = 0;
+        for (long k = start; k <= end; k++) {
+            long len = cycleLength(k);
+            if (len > maxCycle) maxCycle = len;
         }
-        return new int[]{};
+        printf("%ld %ld %ld\\n", i, j, maxCycle);
+    }
+    return 0;
+}`,
+        'C++':`#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+unordered_map<long long, long long> memo;
+
+long long cycleLength(long long n) {
+    if (n == 1) return 1;
+    if (memo.count(n)) return memo[n];
+
+    long long length;
+    if (n % 2 == 0) length = 1 + cycleLength(n / 2);
+    else            length = 1 + cycleLength(3 * n + 1);
+
+    return memo[n] = length;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    long long i, j;
+    while (cin >> i >> j) {
+        long long start = min(i, j), end = max(i, j);
+        long long maxCycle = 0;
+        for (long long k = start; k <= end; k++)
+            maxCycle = max(maxCycle, cycleLength(k));
+        cout << i << " " << j << " " << maxCycle << "\\n";
+    }
+    return 0;
+}`,
+        Python:`import sys
+sys.setrecursionlimit(100000)
+
+memo = {1: 1}
+
+def cycle_length(n):
+    if n in memo:
+        return memo[n]
+    if n % 2 == 0:
+        length = 1 + cycle_length(n // 2)
+    else:
+        length = 1 + cycle_length(3 * n + 1)
+    memo[n] = length
+    return length
+
+for line in sys.stdin:
+    line = line.strip()
+    if not line:
+        continue
+    i, j = map(int, line.split())
+    start, end = min(i, j), max(i, j)
+    max_cycle = max(cycle_length(k) for k in range(start, end + 1))
+    print(i, j, max_cycle)`,
+        Java:`import java.util.*;
+
+public class solution {
+    static HashMap<Long, Long> memo = new HashMap<>();
+
+    public static long cycleLength(long n) {
+        if (n == 1) return 1;
+        if (memo.containsKey(n)) return memo.get(n);
+
+        long length;
+        if (n % 2 == 0) length = 1 + cycleLength(n / 2);
+        else            length = 1 + cycleLength(3 * n + 1);
+
+        memo.put(n, length);
+        return length;
     }
 
     public static void main(String[] args) {
-        int[] res = new Solution().twoSum(new int[]{2,7,11,15}, 9);
-        System.out.println(Arrays.toString(res)); // [0, 1]
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLong()) {
+            long i = sc.nextLong(), j = sc.nextLong();
+            long start = Math.min(i, j), end = Math.max(i, j);
+            long maxCycle = 0;
+            for (long k = start; k <= end; k++)
+                maxCycle = Math.max(maxCycle, cycleLength(k));
+            System.out.println(i + " " + j + " " + maxCycle);
+        }
+        sc.close();
     }
 }`
       }
-    }];
-    init(demo);
+    }]);
   });
 
-function init(data) {
+function loadProblem(data) {
   const problem = data.find(p => p.id === id) || data[0];
   if (!problem) return;
 
-  document.title = `${problem.title} — DBATU CP`;
-  document.getElementById('prob-title').textContent = problem.title;
-  document.getElementById('prob-crumb').textContent = problem.title;
-  document.getElementById('prob-q').textContent     = problem.question;
+  const title = cleanTitle(problem.title);
+  document.title = `${title} — DBATU CP`;
+  document.getElementById('prob-title').textContent = title;
+  document.getElementById('crumb-title').textContent = title;
+  document.getElementById('prob-q').textContent = problem.question;
 
-  const diff = problem.difficulty || 'Medium';
-  const diffEl = document.getElementById('prob-diff');
-  diffEl.textContent = diff;
-  diffEl.className   = `pdiff ${diffMap[diff] || 'medium'}`;
-
-  // Tags
-  const tagsWrap = document.getElementById('prob-tags');
-  (problem.tags || []).forEach(t => {
-    const s = document.createElement('span');
-    s.className = 'ptag'; s.textContent = t;
-    tagsWrap.appendChild(s);
-  });
+  const langs = Object.keys(problem.solutions || {});
+  const countEl = document.getElementById('prob-lang-count');
+  countEl.innerHTML = langs.map(l => `<span class="lang-chip">${l}</span>`).join('');
 
   // Prev / Next
   const idx = data.findIndex(p => p.id === problem.id);
@@ -211,65 +274,69 @@ function init(data) {
     const el = document.getElementById('nav-prev');
     el.href = `problem.html?id=${data[idx-1].id}`;
     el.classList.remove('hidden');
-    document.getElementById('prev-title').textContent = data[idx-1].title;
+    document.getElementById('prev-label').textContent = cleanTitle(data[idx-1].title);
   }
   if (idx < data.length - 1) {
     const el = document.getElementById('nav-next');
     el.href = `problem.html?id=${data[idx+1].id}`;
     el.classList.remove('hidden');
-    document.getElementById('next-title').textContent = data[idx+1].title;
+    document.getElementById('next-label').textContent = cleanTitle(data[idx+1].title);
   }
 
-  // Solutions
-  const sols  = problem.solutions || {};
-  const langs = Object.keys(sols);
-  if (!langs.length) return;
-
+  // Build solution tabs + blocks
   const tabsWrap = document.getElementById('lang-tabs');
   const solsWrap = document.getElementById('solutions');
-  let active = langs[0];
+  const sols     = problem.solutions || {};
 
-  function showLang(lang) {
-    active = lang;
-    document.querySelectorAll('.ltab').forEach(t => t.classList.toggle('active', t.dataset.lang === lang));
-    document.querySelectorAll('.sol-block').forEach(b => b.classList.toggle('hidden', b.dataset.lang !== lang));
+  if (!langs.length) {
+    solsWrap.innerHTML = '<div class="no-sol">No solutions available yet.</div>';
+    return;
   }
 
   langs.forEach((lang, i) => {
-    // Tab
+    // Tab button
     const tab = document.createElement('button');
-    tab.className   = `ltab${i===0?' active':''}`;
-    tab.dataset.lang= lang;
-    tab.textContent = lang.toUpperCase();
-    tab.addEventListener('click', () => showLang(lang));
+    tab.className   = `ltab${i === 0 ? ' active' : ''}`;
+    tab.textContent = lang;
+    tab.dataset.lang = lang;
+    tab.addEventListener('click', () => activate(lang));
     tabsWrap.appendChild(tab);
 
-    // Block
-    const block = document.createElement('div');
-    block.className   = `sol-block${i===0?'':' hidden'}`;
-    block.dataset.lang= lang;
+    // Solution block
+    const cls = langMap[lang.toLowerCase()] || 'clike';
+    const code = sols[lang] || '// No solution provided yet.';
+    const escaped = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-    const cls = langClass[lang.toLowerCase()] || 'clike';
-    const escaped = (sols[lang]||'// No solution provided yet.').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const block = document.createElement('div');
+    block.className   = `sol-block${i === 0 ? '' : ' hidden'}`;
+    block.dataset.lang = lang;
 
     block.innerHTML = `
-      <div class="code-bar">
-        <span class="code-lang">${lang.toUpperCase()}</span>
-        <div style="display:flex;gap:8px">
-          <button class="copy-btn" data-lang="${lang}">
+      <div class="code-topbar">
+        <div class="code-dots">
+          <span class="code-dot cd-r"></span>
+          <span class="code-dot cd-y"></span>
+          <span class="code-dot cd-g"></span>
+        </div>
+        <span class="code-filename">${filenameFor(lang, title)}</span>
+        <div class="code-actions">
+          <button class="act-btn copy-btn">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             Copy
           </button>
-          <button class="dl-btn" data-lang="${lang}">Download</button>
+          <button class="act-btn dl-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </button>
         </div>
       </div>
-      <div class="code-wrap">
-        <pre class="code-pre"><code class="language-${cls}" id="code-${lang}">${escaped}</code></pre>
+      <div class="code-scroll">
+        <pre class="code-pre"><code class="language-${cls}">${escaped}</code></pre>
       </div>
     `;
 
     block.querySelector('.copy-btn').addEventListener('click', function() {
-      navigator.clipboard.writeText(sols[lang]).then(() => {
+      navigator.clipboard.writeText(code).then(() => {
         this.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
         this.classList.add('copied');
         setTimeout(() => {
@@ -280,30 +347,33 @@ function init(data) {
     });
 
     block.querySelector('.dl-btn').addEventListener('click', () => {
-      const ext = {cpp:'cpp',python:'py',java:'java',c:'c',js:'js',javascript:'js'}[lang.toLowerCase()]||'txt';
-      const blob = new Blob([sols[lang]], {type:'text/plain'});
-      const a = Object.assign(document.createElement('a'), {href:URL.createObjectURL(blob), download:`${problem.title.replace(/\s+/g,'_')}.${ext}`});
-      a.click();
+      const ext = {c:'c',cpp:'cpp','c++':'cpp',python:'py',java:'java',javascript:'js',typescript:'ts',bash:'sh',r:'r',v:'v',arduino:'ino'}[lang.toLowerCase()] || 'txt';
+      const slug = title.replace(/\s+/g,'_').toLowerCase();
+      const blob = new Blob([code], {type:'text/plain'});
+      Object.assign(document.createElement('a'), {href:URL.createObjectURL(blob), download:`${slug}.${ext}`}).click();
     });
 
     solsWrap.appendChild(block);
   });
 
-  setTimeout(() => { if (window.Prism) Prism.highlightAll(); }, 120);
+  setTimeout(() => { if (window.Prism) Prism.highlightAll(); }, 100);
 }
 
-// Hint
-document.getElementById('hint-btn').addEventListener('click', function() {
-  const box = document.getElementById('hint-box');
-  box.classList.toggle('hidden');
-  this.textContent = box.classList.contains('hidden') ? 'Show Hint' : 'Hide Hint';
-});
+function activate(lang) {
+  document.querySelectorAll('.ltab').forEach(t => t.classList.toggle('active', t.dataset.lang === lang));
+  document.querySelectorAll('.sol-block').forEach(b => b.classList.toggle('hidden', b.dataset.lang !== lang));
+}
 
-// Share
+function filenameFor(lang, title) {
+  const slug = title.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'').substring(0,20);
+  const ext  = {c:'c',cpp:'cpp','c++':'cpp',python:'py',java:'java',javascript:'js',typescript:'ts',bash:'sh',r:'r',v:'v',arduino:'ino'}[lang.toLowerCase()] || 'txt';
+  return `${slug}.${ext}`;
+}
+
 document.getElementById('share-btn').addEventListener('click', function() {
   navigator.clipboard.writeText(location.href).then(() => {
     const orig = this.innerHTML;
-    this.textContent = '✓ Copied!';
+    this.textContent = '✓ Link copied';
     setTimeout(() => { this.innerHTML = orig; }, 2000);
   });
 });
