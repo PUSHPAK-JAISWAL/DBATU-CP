@@ -8,179 +8,191 @@
 </head>
 <body>
 
-<div class="noise"></div>
-
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">
       <div class="logo-icon">&lt;/&gt;</div>
-      <div>
-        <div class="logo-name">DBATU CP</div>
-        <div class="logo-sub">Competitive Programming</div>
+      <div class="logo-text">
+        <span class="logo-name">DBATU CP</span>
+        <span class="logo-sub">Competitive Programming</span>
       </div>
     </a>
     <div class="search-wrap">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <input id="search" class="search" placeholder="Search problems…" autocomplete="off" spellcheck="false">
     </div>
   </div>
 </header>
 
 <div class="hero">
-  <div class="hero-inner">
-    <div class="eyebrow"><span class="pulse"></span>DBATU Syllabus 2024</div>
-    <h1 class="hero-h1">Master Every<br><span class="accent">Algorithm.</span></h1>
-    <p class="hero-p">Curated competitive programming problems with solutions in C++, Python &amp; Java — aligned to your university syllabus.</p>
-    <div class="stats-bar">
-      <div class="stat"><b id="total-count">—</b><span>Problems</span></div>
-      <div class="stat-sep"></div>
-      <div class="stat"><b>3</b><span>Languages</span></div>
-      <div class="stat-sep"></div>
-      <div class="stat"><b>∞</b><span>Practice</span></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-dot"></span>
+      DBATU University Syllabus
+    </div>
+    <h1 class="hero-h1">Competitive<br><span class="hero-accent">Programming</span><br>Problem Archive</h1>
+    <p class="hero-p">Solutions in multiple languages — C, C++, Python, Java, JavaScript and more. Built for DBATU students.</p>
+    <div class="hero-stats">
+      <div class="hstat-box">
+        <span class="hstat-num" id="total-count">—</span>
+        <span class="hstat-label">Problems</span>
+      </div>
+      <div class="hstat-divider"></div>
+      <div class="hstat-box">
+        <span class="hstat-num">10+</span>
+        <span class="hstat-label">Languages</span>
+      </div>
+      <div class="hstat-divider"></div>
+      <div class="hstat-box">
+        <span class="hstat-num">∞</span>
+        <span class="hstat-label">Practice</span>
+      </div>
     </div>
   </div>
-  <div class="hero-deco" aria-hidden="true">
-    <pre class="hero-code">
-<span class="hc-kw">int</span> <span class="hc-fn">solve</span>(<span class="hc-kw">int</span> n) {
-  <span class="hc-kw">if</span> (n &lt;= <span class="hc-num">1</span>) <span class="hc-kw">return</span> n;
-  <span class="hc-kw">return</span> <span class="hc-fn">solve</span>(n-<span class="hc-num">1</span>)
-       + <span class="hc-fn">solve</span>(n-<span class="hc-num">2</span>);
+  <div class="hero-terminal" aria-hidden="true">
+    <div class="terminal-bar">
+      <span class="t-dot t-red"></span>
+      <span class="t-dot t-yellow"></span>
+      <span class="t-dot t-green"></span>
+      <span class="t-title">solution.cpp</span>
+    </div>
+    <pre class="terminal-code"><span class="tc-comment">// Collatz Conjecture</span>
+<span class="tc-kw">long long</span> <span class="tc-fn">cycleLen</span>(<span class="tc-kw">long long</span> n) {
+  <span class="tc-kw">if</span> (n == <span class="tc-num">1</span>) <span class="tc-kw">return</span> <span class="tc-num">1</span>;
+  <span class="tc-kw">if</span> (n % <span class="tc-num">2</span> == <span class="tc-num">0</span>)
+    <span class="tc-kw">return</span> <span class="tc-num">1</span> + <span class="tc-fn">cycleLen</span>(n/<span class="tc-num">2</span>);
+  <span class="tc-kw">return</span> <span class="tc-num">1</span> + <span class="tc-fn">cycleLen</span>(<span class="tc-num">3</span>*n+<span class="tc-num">1</span>);
 }</pre>
   </div>
 </div>
 
-<div class="layout">
-  <aside class="sidebar">
-    <div class="sf-group">
-      <div class="sf-label">Difficulty</div>
-      <button class="sf active" data-diff="all">All</button>
-      <button class="sf diff-easy" data-diff="Easy">Easy</button>
-      <button class="sf diff-medium" data-diff="Medium">Medium</button>
-      <button class="sf diff-hard" data-diff="Hard">Hard</button>
+<div class="main">
+  <div class="list-header">
+    <div class="list-meta">
+      <span id="res-label" class="res-label">Loading…</span>
     </div>
-    <div class="sf-group">
-      <div class="sf-label">Topic</div>
-      <button class="sf active" data-tag="all">All Topics</button>
-      <button class="sf" data-tag="arrays">Arrays</button>
-      <button class="sf" data-tag="strings">Strings</button>
-      <button class="sf" data-tag="dp">Dynamic Prog.</button>
-      <button class="sf" data-tag="graphs">Graphs</button>
-      <button class="sf" data-tag="trees">Trees</button>
-      <button class="sf" data-tag="sorting">Sorting</button>
-      <button class="sf" data-tag="searching">Searching</button>
-    </div>
-  </aside>
-
-  <div class="content">
-    <div class="list-bar">
-      <span id="res-count" class="res-count"></span>
+    <div class="list-controls">
       <select id="sort" class="sort-sel">
         <option value="default">Default order</option>
-        <option value="easy">Easy first</option>
-        <option value="hard">Hard first</option>
         <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
       </select>
     </div>
+  </div>
 
-    <div id="problems"></div>
+  <div id="problems-list"></div>
 
-    <div id="empty" class="empty hidden">
-      <div>⌀</div>
-      <strong>No problems found</strong>
-      <span>Try a different keyword or clear filters.</span>
-    </div>
+  <div id="empty-state" class="empty-state hidden">
+    <div class="empty-glyph">{ }</div>
+    <p>No problems matched <strong id="empty-query"></strong></p>
+    <small>Try a different keyword.</small>
   </div>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <span>&lt;/&gt; DBATU CP</span>
-    <span>Open source · Built for DBATU students</span>
-    <a href="https://github.com" target="_blank" rel="noopener">GitHub ↗</a>
+    <span class="footer-brand">&lt;/&gt; DBATU CP</span>
+    <span class="footer-mid">Open source · Built for DBATU students</span>
+    <a href="https://github.com" target="_blank" rel="noopener" class="footer-link">GitHub ↗</a>
   </div>
 </footer>
 
 <script>
-let allProblems = [], activeDiff = 'all', activeTag = 'all';
-const diffRank = { Easy:1, Medium:2, Hard:3 };
+let allProblems = [];
 
-fetch("data.json")
-  .then(r => r.json())
-  .then(data => { allProblems = data; document.getElementById('total-count').textContent = data.length; applyFilters(); })
-  .catch(() => {
-    allProblems = [
-      {id:"1",title:"Two Sum",difficulty:"Easy",tags:["arrays"],question:"Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume exactly one solution exists and you may not use the same element twice.",solutions:{cpp:"",python:"",java:""}},
-      {id:"2",title:"Longest Common Subsequence",difficulty:"Medium",tags:["dp","strings"],question:"Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0. A subsequence is a sequence derived from another by deleting some elements without changing the order.",solutions:{cpp:"",python:""}},
-      {id:"3",title:"Dijkstra's Shortest Path",difficulty:"Hard",tags:["graphs"],question:"Given a weighted directed graph and a source vertex, find the shortest distance from the source to all other vertices using Dijkstra's greedy algorithm with a priority queue.",solutions:{cpp:""}},
-      {id:"4",title:"BST Traversal",difficulty:"Easy",tags:["trees"],question:"Implement inorder, preorder, and postorder traversals of a binary search tree. Return the node values in each traversal order as an array.",solutions:{cpp:"",java:""}},
-      {id:"5",title:"Merge Sort",difficulty:"Medium",tags:["sorting"],question:"Implement the merge sort algorithm. Analyze its time and space complexity. Demonstrate sorting of an integer array and compare with quicksort.",solutions:{cpp:"",python:""}},
-      {id:"6",title:"0/1 Knapsack",difficulty:"Hard",tags:["dp"],question:"Given weights and values of n items and knapsack capacity W, determine the maximum value achievable. Each item can be included at most once. Use dynamic programming.",solutions:{cpp:"",python:"",java:""}},
-      {id:"7",title:"Binary Search",difficulty:"Easy",tags:["searching"],question:"Given an array of integers sorted in ascending order and a target, return the index using binary search. Return -1 if not found. Implement both iterative and recursive versions.",solutions:{cpp:"",python:"",java:""}},
-      {id:"8",title:"Kruskal's MST",difficulty:"Hard",tags:["graphs"],question:"Find the minimum spanning tree of a connected undirected weighted graph using Kruskal's algorithm with Union-Find data structure.",solutions:{cpp:""}},
-      {id:"9",title:"String Palindrome Check",difficulty:"Easy",tags:["strings"],question:"Write a function to check if a given string is a palindrome, considering only alphanumeric characters and ignoring case. Return true or false.",solutions:{cpp:"",python:""}},
-      {id:"10",title:"Matrix Chain Multiplication",difficulty:"Hard",tags:["dp"],question:"Given a chain of matrices, find the minimum number of scalar multiplications needed to compute the product. Use dynamic programming to avoid redundant computations.",solutions:{cpp:""}},
-    ];
-    document.getElementById('total-count').textContent = allProblems.length;
-    applyFilters();
-  });
-
-function applyFilters() {
-  const q = document.getElementById('search').value.toLowerCase().trim();
-  const s = document.getElementById('sort').value;
-  let list = allProblems.filter(p => {
-    if (activeDiff !== 'all' && p.difficulty !== activeDiff) return false;
-    if (activeTag  !== 'all' && !(p.tags||[]).includes(activeTag)) return false;
-    if (q && !p.title.toLowerCase().includes(q) && !p.question.toLowerCase().includes(q) && !(p.tags||[]).some(t=>t.includes(q))) return false;
-    return true;
-  });
-  if (s==='easy') list.sort((a,b)=>(diffRank[a.difficulty]||2)-(diffRank[b.difficulty]||2));
-  if (s==='hard') list.sort((a,b)=>(diffRank[b.difficulty]||2)-(diffRank[a.difficulty]||2));
-  if (s==='az')   list.sort((a,b)=>a.title.localeCompare(b.title));
-  render(list);
+// Strip leading problem numbers like "100   " from titles for display
+function cleanTitle(raw) {
+  return raw.replace(/^\d+\s+/, '').trim();
 }
 
+fetch('data.json')
+  .then(r => r.json())
+  .then(data => {
+    allProblems = data;
+    document.getElementById('total-count').textContent = data.length;
+    render(data);
+  })
+  .catch(() => {
+    // Demo data matching the real JSON shape
+    allProblems = [
+      {
+        id: "3nplus1",
+        title: "100       The 3n + 1 problem",
+        question: "Problems in Computer Science are often classified as belonging to a certain class of problems (e.g., NP, Unsolvable, Recursive). In this problem you will be analyzing a property of an algorithm whose classification is not known for all possible inputs.\n\nConsider the following algorithm:\n  1. input n\n  2. print n\n  3. if n = 1 then STOP\n  4. if n is odd then n ← 3n + 1\n  5. else n ← n/2\n  6. GOTO 2\n\nGiven the input 22, the following sequence of numbers will be printed:\n22 11 34 17 52 26 13 40 20 10 5 16 8 4 2 1\n\nFor any two numbers i and j you are to determine the maximum cycle length over all numbers between and including both i and j.",
+        solutions: { C: "", "C++": "", Python: "", Java: "", JavaScript: "", TypeScript: "", R: "", Bash: "", Arduino: "", V: "" }
+      }
+    ];
+    document.getElementById('total-count').textContent = allProblems.length;
+    render(allProblems);
+  });
+
 function render(data) {
-  const wrap = document.getElementById('problems');
-  const empty = document.getElementById('empty');
-  document.getElementById('res-count').textContent = `${data.length} problem${data.length!==1?'s':''}`;
+  const wrap   = document.getElementById('problems-list');
+  const empty  = document.getElementById('empty-state');
+  const label  = document.getElementById('res-label');
+  const q      = document.getElementById('search').value.trim();
+
   wrap.innerHTML = '';
-  if (!data.length) { empty.classList.remove('hidden'); return; }
+  label.textContent = `${data.length} problem${data.length !== 1 ? 's' : ''}`;
+
+  if (!data.length) {
+    document.getElementById('empty-query').textContent = `"${q}"`;
+    empty.classList.remove('hidden');
+    return;
+  }
   empty.classList.add('hidden');
+
   data.forEach((p, i) => {
-    const d = p.difficulty||'Medium';
-    const langs = Object.keys(p.solutions||{cpp:''});
+    const langs  = Object.keys(p.solutions || {});
+    const title  = cleanTitle(p.title);
+    const excerpt = p.question.replace(/\s+/g,' ').substring(0, 150) + '…';
+
     const a = document.createElement('a');
-    a.href = `problem.html?id=${p.id}`;
-    a.className = 'prow';
-    a.style.animationDelay = `${Math.min(i*35,500)}ms`;
+    a.href      = `problem.html?id=${p.id}`;
+    a.className = 'pcard';
+    a.style.animationDelay = `${Math.min(i * 40, 600)}ms`;
+
     a.innerHTML = `
-      <span class="pnum">${String(i+1).padStart(2,'0')}</span>
-      <div class="prow-body">
-        <span class="prow-title">${p.title}</span>
-        <span class="prow-excerpt">${p.question.substring(0,130)}…</span>
+      <div class="pcard-top">
+        <span class="pcard-num">${String(i + 1).padStart(2, '0')}</span>
+        <div class="pcard-langs">
+          ${langs.slice(0, 5).map(l => `<span class="lang-chip">${l}</span>`).join('')}
+          ${langs.length > 5 ? `<span class="lang-chip lang-more">+${langs.length - 5}</span>` : ''}
+        </div>
       </div>
-      <div class="prow-meta">
-        ${(p.tags||[]).slice(0,2).map(t=>`<span class="ptag">${t}</span>`).join('')}
-        ${langs.slice(0,3).map(l=>`<span class="plang">${l.toUpperCase()}</span>`).join('')}
-        <span class="pdiff ${d.toLowerCase()}">${d}</span>
+      <h3 class="pcard-title">${title}</h3>
+      <p class="pcard-excerpt">${excerpt}</p>
+      <div class="pcard-footer">
+        <span class="pcard-cta">View Solutions</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;opacity:.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     `;
     wrap.appendChild(a);
   });
 }
 
-document.getElementById('search').addEventListener('input', applyFilters);
-document.getElementById('sort').addEventListener('change', applyFilters);
-document.querySelectorAll('.sf[data-diff]').forEach(b => b.addEventListener('click', () => {
-  document.querySelectorAll('.sf[data-diff]').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); activeDiff = b.dataset.diff; applyFilters();
-}));
-document.querySelectorAll('.sf[data-tag]').forEach(b => b.addEventListener('click', () => {
-  document.querySelectorAll('.sf[data-tag]').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); activeTag = b.dataset.tag; applyFilters();
-}));
-document.addEventListener('keydown', e => { if ((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();document.getElementById('search').focus();} });
+function applySearch() {
+  const q   = document.getElementById('search').value.toLowerCase().trim();
+  const s   = document.getElementById('sort').value;
+  let list  = allProblems.filter(p =>
+    !q ||
+    p.title.toLowerCase().includes(q) ||
+    p.question.toLowerCase().includes(q)
+  );
+  if (s === 'az') list = [...list].sort((a,b) => cleanTitle(a.title).localeCompare(cleanTitle(b.title)));
+  if (s === 'za') list = [...list].sort((a,b) => cleanTitle(b.title).localeCompare(cleanTitle(a.title)));
+  render(list);
+}
+
+document.getElementById('search').addEventListener('input', applySearch);
+document.getElementById('sort').addEventListener('change', applySearch);
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('search').focus();
+  }
+});
 </script>
 </body>
 </html>
