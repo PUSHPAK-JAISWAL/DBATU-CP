@@ -1,5 +1,5 @@
 repeat {
-    n<- as integer(readLines("stdin",n=1))
+    n<- as.integer(readLines("stdin",n=1))
 
     if(n==0) {
         break
