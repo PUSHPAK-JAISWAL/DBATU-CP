@@ -13,24 +13,22 @@ This repository contains solutions and resources for competitive programming at 
 - C++
 - Java
 - Python
-- Go
 - JavaScript
+- C
+- TypeScript
+- R
+- V
+- Shell
 
 ## Directory Structure
 The repository is structured as follows:
 ```
 DBATU-CP/
-├── algorithms/
-│   ├── sorting/
-│   ├── searching/
-│   └── graph/
 ├── problems/
-│   ├── easy/
-│   ├── medium/
-│   └── hard/
-└── resources/
-    ├── tutorials/
-    └── guide/
+│   ├── solution.language1
+│   ├── solution.language2
+│   └── solution.language3
+└── site/
 ```
 
 ## Getting Started Guide
