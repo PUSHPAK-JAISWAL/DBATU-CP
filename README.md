@@ -43,7 +43,7 @@ DBATU-CP/
 3. **Select the Language** you wish to work with and start solving problems.
 
 ## Project Structure
-The repo contains various folders for algorithms, coding problems sorted by difficulty, and additional resources for learning and preparation. Each file should contain clear documentation of the solution.
+The repo contains various folders for coding problems.
 
 ## Contact
 For any inquiries, please reach out at: [pushpakmjaiswal@gmail.com](mailto:pushpakmjaiswal@gmail.com)
