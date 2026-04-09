@@ -1,34 +1,25 @@
 name: Deploy DBATU CP Site
-
 on:
   push:
     branches:
       - main
-
 permissions:
   contents: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Install Poppler
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
       - name: Install Dependencies
         run: npm install
-
       - name: Build Site
-        run: npm run build-site
-
+        run: npm run build-all
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
