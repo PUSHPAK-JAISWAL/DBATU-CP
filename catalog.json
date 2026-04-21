@@ -45,6 +45,11 @@
     "pdfUrl": "https://raw.githubusercontent.com/PUSHPAK-JAISWAL/DBATU-CP/main/Vito/10041.pdf"
   },
   {
+    "id": "10037",
+    "title": "Bridge",
+    "pdfUrl": "https://raw.githubusercontent.com/PUSHPAK-JAISWAL/DBATU-CP/main/bridge/10037.pdf"
+  },
+  {
     "id": "10183",
     "title": "How many Fibs?",
     "pdfUrl": "https://raw.githubusercontent.com/PUSHPAK-JAISWAL/DBATU-CP/main/fibs/10183.pdf"
@@ -58,6 +63,16 @@
     "id": "10213",
     "title": "How Many Pieces of Land?",
     "pdfUrl": "https://raw.githubusercontent.com/PUSHPAK-JAISWAL/DBATU-CP/main/land/10213.pdf"
+  },
+  {
+    "id": "10035",
+    "title": "Primary Arithmetic",
+    "pdfUrl": "https://raw.githubusercontent.com/PUSHPAK-JAISWAL/DBATU-CP/main/primary_arithmetic/10035.pdf"
+  },
+  {
+    "id": "10018",
+    "title": "Reverse and Add",
+    "pdfUrl": "https://raw.githubusercontent.com/PUSHPAK-JAISWAL/DBATU-CP/main/reverse_add/10018.pdf"
   },
   {
     "id": "10082",
